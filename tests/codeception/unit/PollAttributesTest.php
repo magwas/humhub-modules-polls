@@ -44,16 +44,16 @@ class PollAttributesTest extends HumHubDbTestCase
     }
 
     public function testThereIsAStateSTATE_PROPOSAL() {
-        Poll::STATE_PROPOSAL;
+        $this->assertEquals(0,Poll::STATE_PROPOSAL);
     }
     public function testThereIsAStateSTATE_DEBATE() {
-        Poll::STATE_DEBATE;
+        $this->assertEquals(0,Poll::STATE_DEBATE);
     }
     public function testThereIsAStateSTATE_VOTING() {
-        Poll::STATE_VOTING;
+        $this->assertEquals(0,Poll::STATE_VOTING);
     }
     public function testThereIsAStateSTATE_CLOSED() {
-        Poll::STATE_CLOSED;
+        $this->assertEquals(0,Poll::STATE_CLOSED);
     }
     public function testTheStateAttributeIsValidatedInCreation() {
         $this->poll->state = "hello";
