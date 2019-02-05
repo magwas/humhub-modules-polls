@@ -20,6 +20,8 @@ use humhub\modules\content\components\ContentActiveRecord;
  * @property integer $updated_by
  * @property integer $closed
  * @property integer show_result_after_close
+ * @property boolean $debate
+ * @property integer $state
  *
  * @package humhub.modules.polls.models
  * @since 0.5
@@ -29,9 +31,15 @@ class Poll extends ContentActiveRecord implements Searchable
 {
 
     const MIN_REQUIRED_ANSWERS = 2;
+
     const SCENARIO_CREATE = 'create';
     const SCENARIO_EDIT = 'edit';
     const SCENARIO_CLOSE = 'close';
+
+    const STATE_PROPOSAL = 0;
+    const STATE_DEBATE = 0;
+    const STATE_VOTING = 0;
+    const STATE_CLOSED = 0;
 
     public $newAnswers;
     public $editAnswers;
@@ -50,8 +58,8 @@ class Poll extends ContentActiveRecord implements Searchable
     {
         return [
             self::SCENARIO_CLOSE => [],
-            self::SCENARIO_CREATE => ['question', 'anonymous', 'is_random', 'show_result_after_close', 'newAnswers', 'allow_multiple'],
-            self::SCENARIO_EDIT => ['question', 'anonymous', 'is_random', 'show_result_after_close','newAnswers', 'editAnswers', 'allow_multiple']
+            self::SCENARIO_CREATE => ['question', 'anonymous', 'is_random', 'show_result_after_close', 'newAnswers', 'allow_multiple', 'debate', 'state'],
+            self::SCENARIO_EDIT => ['question', 'anonymous', 'is_random', 'show_result_after_close','newAnswers', 'editAnswers', 'allow_multiple', 'debate', 'state']
         ];
     }
 
@@ -63,6 +71,8 @@ class Poll extends ContentActiveRecord implements Searchable
         return array(
             [['question'], 'required'],
             [['question'], 'string'],
+            [['debate'], 'boolean'],
+            [['state'], 'integer'],
             [['anonymous', 'is_random'], 'boolean'],
             [['newAnswers'], 'required', 'on' => self::SCENARIO_CREATE],
             [['newAnswers'], 'minTwoNewAnswers', 'on' => self::SCENARIO_CREATE],
