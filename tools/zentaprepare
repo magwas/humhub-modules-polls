@@ -1,0 +1,4 @@
+set -x
+export DISPLAY=:0
+Xvnc4 -SecurityTypes none :0 &
+

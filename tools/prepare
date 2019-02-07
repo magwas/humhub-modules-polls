@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -xe
+sudo service mysql start
+mysql -e "create database humhub_test;"
+
+old=$(pwd)
+
+cd /opt/humhub/protected/humhub/tests
+
+sed -i -e "s|'installed' => true,|'installed' => true,\n\t'moduleAutoloadPaths' => ['$(dirname $old)']|g" config/common.php
+
+php codeception/bin/yii migrate/up --includeModuleMigrations=1 --interactive=0
+php codeception/bin/yii installer/auto
+php codeception/bin/yii search/rebuild
+
+php /opt/humhub/protected/vendor/bin/codecept build
+$HOME/chromedriver --url-base=/wd/hub &
+php --server 127.0.0.1:8080 --docroot /opt/humhub &>/dev/null &
+sleep 5
+curl --fail --head http://127.0.0.1:8080/index-test.php

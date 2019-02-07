@@ -6,4 +6,14 @@ nbproject
 **/tests/codeception/_support/_generated/**
 **/tests/codeception/_output/**
 *.swp
+.bash_history
+.cache
+.composer
+.npm
+.pki
+.sudo_as_admin_successful
+.viminfo
+chromedriver
+chromedriver_linux64.zip
+
 

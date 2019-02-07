@@ -1,0 +1,35 @@
+<checks>
+<check
+		title="Model Errors"
+      	modelfile="poll.rich"
+      	modelbasepath="//error"
+      	modelnamepath="@type"
+      	modelvaluepath="concat(//element[@id=current()/@element]/@name,' ',@name)"
+        modelerrorid="$p1/object/error/@errorID"
+      	inputfile="poll.rich"
+      	referencemodel="poll.rich"
+      	inputbasepath="//nonexistent"
+      	inputnamepath=""
+      	inputvaluepath=""
+        inputerrorid="$p1"
+        errorURL="concat('http://adadocs.demokracia.rulez.org/PDEngine/edemo/master/index.html#',$p1)"
+        errortitlestring="zenta:modelErrorTitle($p1,$p4)"
+        errordescription="zenta:modelErrorDescription($p1,$p4)"
+      	/>
+<check
+		title="Unimplemented behaviours"
+      	modelfile="shippable/poll-testcases.xml"
+      	modelbasepath="//testcase"
+      	modelnamepath="@name"
+      	modelvaluepath="''"
+        modelerrorid="zenta:pollErrorId($p1)"
+      	inputfile="shippable/poll-implementedTestCases.xml"
+      	inputbasepath="//testcase"
+      	inputnamepath="@modelmatch"
+      	inputvaluepath="''"
+        inputerrorid="$p1//object/testcase/@name"
+        errorURL="concat('http://adadocs.demokracia.rulez.org/PDEngine/edemo/master/index.html#',$p1)"
+        errortitlestring="zenta:pollErrorTitle($p1)"
+        errordescription="zenta:pollErrorDescription($p1, $p2)"
+      	/>
+</checks>

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -xe
+. tools/prepare
+php /opt/humhub/protected/vendor/bin/codecept run --env travis -d
