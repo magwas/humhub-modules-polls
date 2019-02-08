@@ -19,7 +19,7 @@
 
     <xsl:template match="folder[property[@key='display']/@value='hidden']" mode="varlist"/-->
 
-    <xsl:function name="zenta:engineErrorDescription">
+    <xsl:function name="zenta:pollErrorDescription">
     	<xsl:param name="entry"/>
     	<xsl:param name="other"/>
     	<xsl:variable name="testcase" select="$entry/object/testcase"/>
@@ -47,7 +47,7 @@
     	<xsl:choose>
     		<xsl:when test="$testcase/@featureid">
     	issue markup:
-    	[Deviation in model](http://adadocs.demokracia.rulez.org/PDEngine/edemo/master/index.html#<xsl:value-of select="zenta:engineErrorId($entry)"/>)
+    	[Deviation in model](http://adadocs.demokracia.rulez.org/PDEngine/edemo/master/index.html#<xsl:value-of select="zenta:pollErrorId($entry)"/>)
     		</xsl:when>
     		<xsl:otherwise>
     	issue markup:
@@ -55,7 +55,7 @@
     		</xsl:otherwise>
     	</xsl:choose>
     </xsl:function>
-    <xsl:function name="zenta:engineErrorId">
+    <xsl:function name="zenta:pollErrorId">
     	<xsl:param name="entry"/>
     	<xsl:variable name="testcase" select="$entry/object/testcase"/>
     	<xsl:choose>
@@ -67,7 +67,7 @@
     		</xsl:otherwise>
     	</xsl:choose>
     </xsl:function>
-    <xsl:function name="zenta:engineErrorTitle">
+    <xsl:function name="zenta:pollErrorTitle">
     	<xsl:param name="entry"/>
     	<xsl:variable name="testcase" select="$entry/object/testcase"/>
     	<xsl:value-of select="concat('Unimplemented feature',':',$testcase/@name)"/>
